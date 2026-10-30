@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: logicaerrows-mp
+    runtime: node
+    plan: free
+    region: eu
+    buildCommand: echo "залежностей немає — нічого будувати"
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22

@@ -7422,8 +7422,15 @@
         const mpServerUrl = document.getElementById('mp-server-url');
         const mpConnStatus = document.getElementById('mp-conn-status');
 
+        // Сторінка на статичному хостингу (GitHub Pages) не тримає WebSocket —
+        // для неї потрібна адреса окремого сервера. Впиши сюди свій URL з Render,
+        // або просто встав його у поле «Адреса сервера» — вибір запам'ятається.
+        const MP_PUBLIC_WS = 'wss://logicaerrows-mp.onrender.com';
+        const MP_STATIC_HOST = /(github\.io|githubusercontent\.com|netlify\.app|vercel\.app|pages\.dev)$/i;
+
         if (localStorage.getItem('mp_server_url')) mpServerUrl.value = localStorage.getItem('mp_server_url');
         else if (!location.hostname) mpServerUrl.value = 'ws://localhost:3000';
+        else if (MP_STATIC_HOST.test(location.hostname)) mpServerUrl.value = MP_PUBLIC_WS;
         else {
             let proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
             let port = (location.port && location.port !== '80' && location.port !== '443') ? ':' + location.port : '';
@@ -7514,7 +7521,7 @@
             if (mpWs && mpWs.readyState === 1) mpWs.send(JSON.stringify(msg));
         }
 
-        function mpConnect(url) {
+        function mpConnect(url, timeoutMs) {
             return new Promise((resolve, reject) => {
                 try {
                     const ws = new WebSocket(url);
@@ -7522,7 +7529,7 @@
                     let settled = false;
                     ws.onopen = () => { if (!settled) { settled = true; resolve(ws); } };
                     ws.onerror = () => { if (!settled) { settled = true; reject(new Error('fail')); } };
-                    setTimeout(() => { if (!settled) { settled = true; reject(new Error('timeout')); } }, 3000);
+                    setTimeout(() => { if (!settled) { settled = true; reject(new Error('timeout')); } }, timeoutMs || 3000);
                 } catch(e) { reject(e); }
             });
         }
@@ -7536,6 +7543,15 @@
             mpWs = null;
         }
 
+        function mpAttachSocket(ws, url) {
+            mpWs = ws;
+            localStorage.setItem('mp_server_url', url);
+            mpConnStatus.textContent = 'Сервер підключено ✅'; mpConnStatus.style.color = '#4caf50';
+            ws.onmessage = mpOnMessage;
+            ws.onclose = () => { mpWs = null; mpOnDisconnected(); };
+            ws.onerror = () => {};
+        }
+
         async function mpTryConnect() {
             const url = mpServerUrl.value.trim();
             if (!url) return false;
@@ -7546,14 +7562,18 @@
             mpDropSocket();
             mpConnStatus.textContent = 'Підключення...'; mpConnStatus.style.color = '#ff9800';
             try {
-                mpWs = await mpConnect(url);
-                localStorage.setItem('mp_server_url', url);
-                mpConnStatus.textContent = 'Сервер підключено ✅'; mpConnStatus.style.color = '#4caf50';
-                mpWs.onmessage = mpOnMessage;
-                mpWs.onclose = () => { mpWs = null; mpOnDisconnected(); };
-                mpWs.onerror = () => {};
+                mpAttachSocket(await mpConnect(url), url);
                 return true;
             } catch(e) {
+                // Безплатний Render присипляє сервіс без трафіку — перший запуск триває до хвилини.
+                if (/onrender\.com/i.test(url)) {
+                    mpConnStatus.textContent = 'Розбуджую сервер… (перший запуск до 1 хв)';
+                    mpConnStatus.style.color = '#ff9800';
+                    try {
+                        mpAttachSocket(await mpConnect(url, 70000), url);
+                        return true;
+                    } catch(e2) {}
+                }
                 mpConnStatus.textContent = 'Локальний режим (без сервера)'; mpConnStatus.style.color = '#ff9800';
                 mpWs = null;
                 return false;
