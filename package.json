@@ -1,0 +1,12 @@
+{
+  "name": "logicaerrows2.0",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Logic Arrows — редактор логічних схем із мультиплеєром через WebSocket.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
