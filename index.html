@@ -7911,6 +7911,15 @@
             return objects;
         }
 
+        function mpApplySavedState(obj, saved) {
+            if (!obj || !saved) return;
+            for (const k in saved) {
+                if (saved[k] !== undefined) obj[k] = saved[k];
+            }
+            const svg = obj.element && obj.element.querySelector('svg');
+            if (svg && saved.rotation !== undefined) svg.style.transform = `rotate(${saved.rotation || 0}deg)`;
+        }
+
         function mpDeserializeGrid(objects) {
             mpIsApplyingState = true;
             pauseAutoSave();
@@ -7925,6 +7934,7 @@
             }
             for (let key in newState) {
                 if (!gridObjects[key]) instantiateObject(newState[key]);
+                else mpApplySavedState(gridObjects[key], newState[key]);
             }
             document.querySelectorAll('.display-master-text').forEach(el => el.remove());
             currentDisplays = [];
