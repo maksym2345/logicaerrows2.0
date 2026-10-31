@@ -77,6 +77,24 @@
             background: rgba(0,0,0,0.7); padding: 0 2px; border-radius: 2px;
             pointer-events: none; z-index: 12;
         }
+
+        /* ---- LED матриця 8×8 ---- */
+        .grid-object.led-matrix-block { padding: 1px; }
+        .ledm-grid {
+            display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px;
+            width: 180px; margin: 6px auto 0; padding: 5px; background: #0b0f12;
+            border: 1px solid #455a64; border-radius: 7px; touch-action: none;
+            user-select: none; -webkit-user-select: none;
+        }
+        .ledm-px { aspect-ratio: 1 / 1; background: #1b232b; border-radius: 2px; cursor: pointer; }
+        .ledm-px.on { background: var(--ledm-on, #ff1744); box-shadow: 0 0 4px var(--ledm-on, #ff1744); }
+        .ledm-px:hover { outline: 1px solid rgba(255,255,255,0.65); outline-offset: -1px; }
+        .ledm-tools { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; align-items: center; margin-top: 6px; }
+        .ledm-tools button { background: #3b66c4; color: #fff; border: none; border-radius: 4px; padding: 3px 7px; font-size: 11px; cursor: pointer; }
+        .ledm-tools button:hover { background: #4c7ae0; }
+        .ledm-tools select { background: #1e375a; color: #fff; border: 1px solid #3b66c4; border-radius: 4px; padding: 3px 4px; font-size: 11px; }
+        .ledm-frame-label { font-size: 11px; min-width: 72px; text-align: center; opacity: 0.9; }
+        .ledm-hint { font-size: 10px; opacity: 0.7; text-align: center; margin-top: 5px; line-height: 1.35; }
         
         .grid-object.web-display-block {
             background: #222; border: 2px dashed #555;
@@ -116,25 +134,25 @@
 
         .blocked { opacity: 0.25; filter: grayscale(1); }
 
-        .active-red:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg path, 
-        .active-red:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg circle, 
-        .active-red:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg rect { fill: #ff1744 !important; stroke: #ff1744 !important; }
-        .active-red:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg line { stroke: #ff1744 !important; }
+        .active-red:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg path, 
+        .active-red:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg circle, 
+        .active-red:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg rect { fill: #ff1744 !important; stroke: #ff1744 !important; }
+        .active-red:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg line { stroke: #ff1744 !important; }
         
-        .active-green:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg path, 
-        .active-green:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg circle, 
-        .active-green:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg rect { fill: #4caf50 !important; stroke: #4caf50 !important; }
-        .active-green:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg line { stroke: #4caf50 !important; }
+        .active-green:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg path, 
+        .active-green:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg circle, 
+        .active-green:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg rect { fill: #4caf50 !important; stroke: #4caf50 !important; }
+        .active-green:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg line { stroke: #4caf50 !important; }
         
-        .active-blue:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg path, 
-        .active-blue:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg circle, 
-        .active-blue:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg rect { fill: #2196f3 !important; stroke: #2196f3 !important; }
-        .active-blue:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg line { stroke: #2196f3 !important; }
+        .active-blue:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg path, 
+        .active-blue:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg circle, 
+        .active-blue:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg rect { fill: #2196f3 !important; stroke: #2196f3 !important; }
+        .active-blue:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg line { stroke: #2196f3 !important; }
         
-        .active-yellow:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg path, 
-        .active-yellow:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg circle, 
-        .active-yellow:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg rect { fill: #ffea00 !important; stroke: #ffea00 !important; }
-        .active-yellow:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block) svg line { stroke: #ffea00 !important; }
+        .active-yellow:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg path, 
+        .active-yellow:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg circle, 
+        .active-yellow:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg rect { fill: #ffea00 !important; stroke: #ffea00 !important; }
+        .active-yellow:not(.rgb-selector-block):not(.servo-block):not(.seven-seg-block):not(.buzzer-block):not(.note-block):not(.rgb-lamp-block):not(.speaker-block):not(.media-block):not(.led-matrix-block) svg line { stroke: #ffea00 !important; }
 
         body.night .grid-object:not([class*="active-"]):not(.web-display-block) svg path { opacity: 0.7; }
 
@@ -148,6 +166,7 @@
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: #1e375a; border: 3px solid #3b66c4; padding: 16px; border-radius: 12px;
             z-index: 2000; width: 280px; flex-direction: column; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: #fff;
+            max-height: 92vh; overflow-y: auto; box-sizing: border-box;
         }
         #worlds-modal {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -659,6 +678,7 @@
                 <div class="matrix-cell"><div class="matrix-item" data-id="am312_pir"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#1c3144" stroke="#00bcd4" stroke-width="2"/><circle cx="12" cy="12" r="6" fill="#e0e0e0" stroke="#b0bec5" stroke-width="1.5"/><path d="M10 10a3 3 0 0 1 4 0" stroke="#78909c" stroke-width="1" fill="none"/></svg></div><div class="block-title">AM312 PIR</div></div>
                 <div class="matrix-cell"><div class="matrix-item" data-id="servo"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="#1e272c" stroke="#00bcd4" stroke-width="2"/><circle cx="12" cy="12" r="7" fill="#37474f"/><circle cx="12" cy="12" r="2" fill="#ffffff"/><g class="servo-arm"><path d="M12 12 L12 4 L14 7 L10 7 Z" fill="#ff9800"/></g></svg></div><div class="block-title">Сервопривід</div></div>
                 <div class="matrix-cell"><div class="matrix-item" data-id="seven_segment"><svg viewBox="0 0 24 24"><rect x="3" y="2" width="18" height="20" rx="2" fill="#111" stroke="#ff1744" stroke-width="1.5"/><path d="M8 4h8M16 4v7M16 13v7M8 20h8M8 13v7M8 4v7M8 12h8" stroke="#ff1744" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><div class="block-title">7-Сегментний</div></div>
+                <div class="matrix-cell"><div class="matrix-item" data-id="led_matrix"><svg viewBox="0 0 24 24"><rect x="0.6" y="0.6" width="22.8" height="22.8" rx="2" fill="#0b0f12" stroke="#455a64" stroke-width="0.8"/><text x="12" y="13.6" text-anchor="middle" font-size="5.2" fill="#4fc3f7" font-family="monospace">8x8</text></svg></div><div class="block-title">LED 8×8</div></div>
                 <div class="matrix-cell"><div class="matrix-item" data-id="slime_block"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4" fill="#4caf50" opacity="0.85" stroke="#2e7d32" stroke-width="2"/><rect x="6" y="6" width="12" height="12" rx="2" fill="#81c784"/><circle cx="9" cy="9" r="1.5" fill="#fff"/><circle cx="15" cy="9" r="1.5" fill="#fff"/></svg></div><div class="block-title">Слиз Сл.</div></div>
             </div>
             <div class="matrix-row">
@@ -847,6 +867,7 @@
         let gameLastTickTime = 0;
         let gameAccumMs = 0;
         let activeConfigTarget = null;
+        let ledMatrixEditState = null;
         let wirelessChannels = {};
 
         // Audio Context для зуммера
@@ -1990,6 +2011,62 @@
                 <path d="M8 12h8" stroke="${isSeg('g')}" stroke-width="2" stroke-linecap="round"/>`;
         }
 
+        // ==================== LED МАТРИЦЯ 8×8 ====================
+        const LED_MATRIX_PRESETS = [
+            { name: 'Серце', frame: [0b00000000, 0b00111100, 0b01111110, 0b11111111, 0b11111111, 0b01111110, 0b00111100, 0b00000000] },
+            { name: 'Смайл', frame: [0b00111100, 0b01000010, 0b10100101, 0b10000001, 0b10100101, 0b10011001, 0b01000010, 0b00111100] },
+            { name: 'Стрілка', frame: [0b00011000, 0b00111100, 0b01111110, 0b11011011, 0b00011000, 0b00011000, 0b00011000, 0b00011000] },
+            { name: 'Хрест', frame: [0b00011000, 0b00011000, 0b00011000, 0b11111111, 0b11111111, 0b00011000, 0b00011000, 0b00011000] },
+            { name: 'Рамка', frame: [0b11111111, 0b10000001, 0b10000001, 0b10000001, 0b10000001, 0b10000001, 0b10000001, 0b11111111] },
+            { name: 'Шахи', frame: [0b10101010, 0b01010101, 0b10101010, 0b01010101, 0b10101010, 0b01010101, 0b10101010, 0b01010101] }
+        ];
+
+        function ledMatrixEmptyFrame() { return [0, 0, 0, 0, 0, 0, 0, 0]; }
+
+        function ledMatrixNormalizeFrame(frame) {
+            const out = ledMatrixEmptyFrame();
+            if (!Array.isArray(frame)) return out;
+            for (let r = 0; r < 8; r++) out[r] = (parseInt(frame[r], 10) || 0) & 0xFF;
+            return out;
+        }
+
+        function ledMatrixNormalizeFrames(frames) {
+            if (!Array.isArray(frames) || frames.length === 0) return [LED_MATRIX_PRESETS[0].frame.slice()];
+            return frames.slice(0, 32).map(ledMatrixNormalizeFrame);
+        }
+
+        // Рівень 0–255 → заповнення 64 пікселів зліва-направо, згори-вниз.
+        function ledMatrixLevelFrame(level) {
+            const out = ledMatrixEmptyFrame();
+            const lvl = Math.max(0, Math.min(255, level | 0));
+            const count = Math.round((lvl / 255) * 64);
+            for (let i = 0; i < count; i++) out[i >> 3] |= (1 << (7 - (i & 7)));
+            return out;
+        }
+
+        function generateLedMatrixSVG(frame, onColor = '#ff1744', offColor = '#151b20') {
+            const f = ledMatrixNormalizeFrame(frame);
+            let rects = '';
+            for (let r = 0; r < 8; r++) {
+                const bits = f[r];
+                for (let c = 0; c < 8; c++) {
+                    const lit = (bits >> (7 - c)) & 1;
+                    rects += `<rect class="led-px" x="${(1.6 + c * 2.6).toFixed(2)}" y="${(1.6 + r * 2.6).toFixed(2)}" width="2.1" height="2.1" rx="0.35" fill="${lit ? onColor : offColor}"/>`;
+                }
+            }
+            return `<rect x="0.6" y="0.6" width="22.8" height="22.8" rx="2" fill="#0b0f12" stroke="#455a64" stroke-width="0.8"/>${rects}`;
+        }
+
+        function ledMatrixSignalColor(name, fallback) {
+            const map = { red: '#ff1744', yellow: '#ffea00', green: '#4caf50', blue: '#2196f3', purple: '#9c27b0', orange: '#ff9800', black: '#546e7a' };
+            return map[name] || fallback || '#ff1744';
+        }
+
+        // Гарна іконка в палітрі замість заглушки "8x8".
+        document.querySelectorAll('.matrix-item[data-id="led_matrix"] svg').forEach(iconSvg => {
+            iconSvg.innerHTML = generateLedMatrixSVG(LED_MATRIX_PRESETS[0].frame, '#ff1744', '#1b232b');
+        });
+
         function resizeLightOverlay() {
             lightOverlay.width = window.innerWidth;
             lightOverlay.height = window.innerHeight;
@@ -2244,6 +2321,23 @@
                                 leds[li].setAttribute('fill', '#4caf50');
                             } else {
                                 leds[li].setAttribute('fill', '#333');
+                            }
+                        }
+                    }
+                }
+                if (obj.type === 'led_matrix') {
+                    const key = obj._matrixKey || '0||';
+                    if (obj._matrixSig !== key) {
+                        obj._matrixSig = key;
+                        const svg = obj.element.querySelector('svg');
+                        if (svg) {
+                            const rects = svg.querySelectorAll('rect.led-px');
+                            const frame = obj._matrixFrame;
+                            const color = obj._matrixOnColor || '#ff1744';
+                            const lit = !!obj._matrixLit;
+                            for (let pi = 0; pi < rects.length; pi++) {
+                                const on = lit && frame && ((frame[pi >> 3] >> (7 - (pi & 7))) & 1);
+                                rects[pi].setAttribute('fill', on ? color : '#151b20');
                             }
                         }
                     }
@@ -2809,6 +2903,58 @@
                         </div>
                     `;
                     configModal.style.display = 'flex';
+                    return;
+                }
+
+                if (clickedObj.type === 'led_matrix') {
+                    activeConfigTarget = clickedObj;
+                    modalTitle.innerText = "LED Матриця 8×8";
+                    const ledmFrames = ledMatrixNormalizeFrames(clickedObj.matrixFrames);
+                    const ledmIdx = Math.max(0, Math.min(ledmFrames.length - 1, clickedObj.matrixFrame ?? 0));
+                    ledMatrixEditState = { frames: ledmFrames.map(f => f.slice()), idx: ledmIdx };
+                    const ledmMode = clickedObj.matrixMode || 'pattern';
+                    const ledmTrig = clickedObj.matrixTrigger || 'hold';
+                    const modeOpts = [['pattern', 'Візерунок'], ['anim', 'Анімація'], ['value', 'Рівень 0–255'], ['binary', 'Двійковий код']]
+                        .map(([v, n]) => `<option value="${v}" ${ledmMode === v ? 'selected' : ''}>${n}</option>`).join('');
+                    const trigOpts = [['hold', 'При сигналі'], ['always', 'Завжди']]
+                        .map(([v, n]) => `<option value="${v}" ${ledmTrig === v ? 'selected' : ''}>${n}</option>`).join('');
+                    const presetOpts = LED_MATRIX_PRESETS.map((p, i) => `<option value="${i}">${p.name}</option>`).join('');
+                    modalFields.innerHTML = `
+                        <div class="modal-row">
+                            <label>Режим:</label>
+                            <select id="cfg-ledm-mode">${modeOpts}</select>
+                        </div>
+                        <div class="modal-row">
+                            <label>Реагування:</label>
+                            <select id="cfg-ledm-trigger">${trigOpts}</select>
+                        </div>
+                        <div class="modal-row">
+                            <label>Колір:</label>
+                            <input type="color" id="cfg-ledm-color" value="${clickedObj.matrixColor || '#ff1744'}" style="width:44px;height:24px;padding:0;border:none;background:none;">
+                        </div>
+                        <div class="modal-row" style="margin-top:-4px; justify-content:flex-start;">
+                            <label style="display:flex;align-items:center;gap:5px;font-size:11px;opacity:0.9;cursor:pointer;"><input type="checkbox" id="cfg-ledm-autocolor" style="width:auto;padding:0;margin:0;flex:0 0 auto;" ${clickedObj.matrixAutoColor !== false ? 'checked' : ''}> Колір за сигналом</label>
+                        </div>
+                        <div class="modal-row">
+                            <label>Кадрів/с:</label>
+                            <input type="number" id="cfg-ledm-fps" min="1" max="30" value="${clickedObj.matrixFps ?? 4}">
+                        </div>
+                        <div class="ledm-grid" id="cfg-ledm-grid"></div>
+                        <div class="ledm-tools">
+                            <button id="cfg-ledm-prev" title="Попередній кадр">◀</button>
+                            <span class="ledm-frame-label" id="cfg-ledm-frame-label"></span>
+                            <button id="cfg-ledm-next" title="Наступний кадр">▶</button>
+                        </div>
+                        <div class="ledm-tools">
+                            <button id="cfg-ledm-add" title="Додати порожній кадр">+ Кадр</button>
+                            <button id="cfg-ledm-dup" title="Дублювати поточний кадр">⧉ Дубль</button>
+                            <button id="cfg-ledm-del" title="Видалити поточний кадр">🗑</button>
+                            <select id="cfg-ledm-preset"><option value="">Шаблон…</option>${presetOpts}</select>
+                        </div>
+                        <div class="ledm-hint">Клікай або проведи мишею по пікселях. У режимі «Анімація» кадри перемикаються, поки є сигнал.</div>
+                    `;
+                    configModal.style.display = 'flex';
+                    ledMatrixBuildEditor();
                     return;
                 }
 
@@ -3443,6 +3589,9 @@
                 } else if (activeId === 'seven_segment') {
                     initialSvg = generateSevenSegmentSVG('8', '#ff1744', '#330000');
                     div.classList.add('seven-seg-block');
+                } else if (activeId === 'led_matrix') {
+                    initialSvg = generateLedMatrixSVG(LED_MATRIX_PRESETS[0].frame, '#151b20', '#151b20');
+                    div.classList.add('led-matrix-block');
                 } else if (activeId === 'buzzer') {
                     initialSvg = BUZZER_SVG;
                     div.classList.add('buzzer-block');
@@ -3490,6 +3639,9 @@
                     repeaterDelay: 1, signalBuffer: [],
                     targetAngle: 90, servoAngle: 0,
                     displayDigit: 8,
+                    matrixFrames: [LED_MATRIX_PRESETS[0].frame.slice()], matrixMode: 'pattern', matrixFrame: 0,
+                    matrixFps: 4, matrixTrigger: 'hold', matrixAutoColor: true, matrixColor: '#ff1744',
+                    _matrixAnimIdx: 0, _matrixAnimAt: 0, _matrixSig: '',
                     keyLabel: 'E', assignedCode: 'KeyE', keyPressed: false,
                     lightMode: 'night',
                     filterColor: 'red',
@@ -4140,6 +4292,21 @@
                     activeConfigTarget.buttonHoldTicks = Math.max(1, Math.min(40, parseInt(document.getElementById('cfg-btn-hold').value) || 1));
                     const hbBadge = activeConfigTarget.element.querySelector('.button-hold-badge');
                     if (hbBadge) hbBadge.innerText = `${activeConfigTarget.buttonHoldTicks}T`;
+                } else if (activeConfigTarget.type === 'led_matrix') {
+                    if (ledMatrixEditState && ledMatrixEditState.frames && ledMatrixEditState.frames.length) {
+                        activeConfigTarget.matrixFrames = ledMatrixEditState.frames.map(f => ledMatrixNormalizeFrame(f));
+                        activeConfigTarget.matrixFrame = Math.max(0, Math.min(ledMatrixEditState.frames.length - 1, ledMatrixEditState.idx));
+                    }
+                    activeConfigTarget.matrixMode = document.getElementById('cfg-ledm-mode').value || 'pattern';
+                    activeConfigTarget.matrixTrigger = document.getElementById('cfg-ledm-trigger').value || 'hold';
+                    activeConfigTarget.matrixFps = Math.max(1, Math.min(30, parseInt(document.getElementById('cfg-ledm-fps').value) || 4));
+                    activeConfigTarget.matrixAutoColor = document.getElementById('cfg-ledm-autocolor').checked;
+                    const ledmColor = (document.getElementById('cfg-ledm-color').value || '#ff1744').toLowerCase();
+                    activeConfigTarget.matrixColor = /^#[0-9a-f]{6}$/.test(ledmColor) ? ledmColor : '#ff1744';
+                    activeConfigTarget._matrixAnimIdx = 0;
+                    activeConfigTarget._matrixAnimAt = 0;
+                    activeConfigTarget._matrixSig = '';
+                    ledMatrixEditState = null;
                 } else {
                     activeConfigTarget.frequency = parseInt(document.getElementById('cfg-freq').value) || 1;
                     activeConfigTarget.element.setAttribute('data-freq', `CH:${activeConfigTarget.frequency}`);
@@ -4181,6 +4348,218 @@
             `;
             document.body.appendChild(overlay);
             overlay.querySelector('#alert-ok-btn').addEventListener('click', () => overlay.remove());
+        }
+
+        // ==================== РЕДАКТОР LED МАТРИЦІ ====================
+        function ledMatrixApplyEditorColor() {
+            const grid = document.getElementById('cfg-ledm-grid');
+            const colorEl = document.getElementById('cfg-ledm-color');
+            if (grid && colorEl) grid.style.setProperty('--ledm-on', colorEl.value || '#ff1744');
+        }
+
+        function ledMatrixBuildEditor() {
+            const grid = document.getElementById('cfg-ledm-grid');
+            const label = document.getElementById('cfg-ledm-frame-label');
+            if (!grid || !ledMatrixEditState) return;
+            const st = ledMatrixEditState;
+            if (st.idx < 0 || st.idx >= st.frames.length) st.idx = 0;
+            const frame = st.frames[st.idx] || ledMatrixEmptyFrame();
+            let html = '';
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    const on = (frame[r] >> (7 - c)) & 1;
+                    html += `<div class="ledm-px${on ? ' on' : ''}" data-r="${r}" data-c="${c}"></div>`;
+                }
+            }
+            grid.innerHTML = html;
+            if (label) label.innerText = `Кадр ${st.idx + 1}/${st.frames.length}`;
+            ledMatrixApplyEditorColor();
+
+            let painting = false;
+            let paintOn = true;
+            const paintCell = (el) => {
+                if (!el || !el.classList.contains('ledm-px')) return;
+                const r = parseInt(el.dataset.r, 10);
+                const c = parseInt(el.dataset.c, 10);
+                const f = ledMatrixEditState.frames[ledMatrixEditState.idx];
+                if (!f) return;
+                if (paintOn) f[r] |= (1 << (7 - c));
+                else f[r] &= ~(1 << (7 - c));
+                el.classList.toggle('on', paintOn);
+            };
+            grid.onpointerdown = (e) => {
+                const el = e.target.closest('.ledm-px');
+                if (!el) return;
+                e.preventDefault();
+                const r = parseInt(el.dataset.r, 10);
+                const c = parseInt(el.dataset.c, 10);
+                const f = ledMatrixEditState.frames[ledMatrixEditState.idx];
+                paintOn = !((f[r] >> (7 - c)) & 1);
+                painting = true;
+                paintCell(el);
+                try { grid.setPointerCapture(e.pointerId); } catch (err) {}
+            };
+            grid.onpointermove = (e) => {
+                if (!painting) return;
+                const el = document.elementFromPoint(e.clientX, e.clientY);
+                if (el && el.classList.contains('ledm-px') && grid.contains(el)) paintCell(el);
+            };
+            grid.onpointerup = () => { painting = false; };
+            grid.onpointercancel = () => { painting = false; };
+
+            const colorEl = document.getElementById('cfg-ledm-color');
+            if (colorEl) colorEl.oninput = ledMatrixApplyEditorColor;
+
+            const go = (delta) => {
+                const s = ledMatrixEditState;
+                s.idx = (s.idx + delta + s.frames.length) % s.frames.length;
+                ledMatrixBuildEditor();
+            };
+            const prevBtn = document.getElementById('cfg-ledm-prev');
+            const nextBtn = document.getElementById('cfg-ledm-next');
+            const addBtn = document.getElementById('cfg-ledm-add');
+            const dupBtn = document.getElementById('cfg-ledm-dup');
+            const delBtn = document.getElementById('cfg-ledm-del');
+            const presetSel = document.getElementById('cfg-ledm-preset');
+            if (prevBtn) prevBtn.onclick = () => go(-1);
+            if (nextBtn) nextBtn.onclick = () => go(1);
+            if (addBtn) addBtn.onclick = () => {
+                const s = ledMatrixEditState;
+                if (s.frames.length >= 32) return;
+                s.frames.splice(s.idx + 1, 0, ledMatrixEmptyFrame());
+                s.idx++;
+                ledMatrixBuildEditor();
+            };
+            if (dupBtn) dupBtn.onclick = () => {
+                const s = ledMatrixEditState;
+                if (s.frames.length >= 32) return;
+                s.frames.splice(s.idx + 1, 0, s.frames[s.idx].slice());
+                s.idx++;
+                ledMatrixBuildEditor();
+            };
+            if (delBtn) delBtn.onclick = () => {
+                const s = ledMatrixEditState;
+                if (s.frames.length <= 1) s.frames[0] = ledMatrixEmptyFrame();
+                else {
+                    s.frames.splice(s.idx, 1);
+                    if (s.idx >= s.frames.length) s.idx = s.frames.length - 1;
+                }
+                ledMatrixBuildEditor();
+            };
+            if (presetSel) presetSel.onchange = (e) => {
+                const i = parseInt(e.target.value, 10);
+                if (!isNaN(i) && LED_MATRIX_PRESETS[i]) {
+                    ledMatrixEditState.frames[ledMatrixEditState.idx] = LED_MATRIX_PRESETS[i].frame.slice();
+                    ledMatrixBuildEditor();
+                }
+                e.target.value = '';
+            };
+        }
+
+        // ==================== РЕДАКТОР LED МАТРИЦІ ====================
+        function ledMatrixApplyEditorColor() {
+            const grid = document.getElementById('cfg-ledm-grid');
+            const colorEl = document.getElementById('cfg-ledm-color');
+            if (grid && colorEl) grid.style.setProperty('--ledm-on', colorEl.value || '#ff1744');
+        }
+
+        function ledMatrixBuildEditor() {
+            const grid = document.getElementById('cfg-ledm-grid');
+            const label = document.getElementById('cfg-ledm-frame-label');
+            if (!grid || !ledMatrixEditState) return;
+            const st = ledMatrixEditState;
+            if (st.idx < 0 || st.idx >= st.frames.length) st.idx = 0;
+            const frame = st.frames[st.idx] || ledMatrixEmptyFrame();
+            let html = '';
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    const on = (frame[r] >> (7 - c)) & 1;
+                    html += `<div class="ledm-px${on ? ' on' : ''}" data-r="${r}" data-c="${c}"></div>`;
+                }
+            }
+            grid.innerHTML = html;
+            if (label) label.innerText = `Кадр ${st.idx + 1}/${st.frames.length}`;
+            ledMatrixApplyEditorColor();
+
+            let painting = false;
+            let paintOn = true;
+            const paintCell = (el) => {
+                if (!el || !el.classList.contains('ledm-px')) return;
+                const r = parseInt(el.dataset.r, 10);
+                const c = parseInt(el.dataset.c, 10);
+                const f = ledMatrixEditState.frames[ledMatrixEditState.idx];
+                if (!f) return;
+                if (paintOn) f[r] |= (1 << (7 - c));
+                else f[r] &= ~(1 << (7 - c));
+                el.classList.toggle('on', paintOn);
+            };
+            grid.onpointerdown = (e) => {
+                const el = e.target.closest('.ledm-px');
+                if (!el) return;
+                e.preventDefault();
+                const r = parseInt(el.dataset.r, 10);
+                const c = parseInt(el.dataset.c, 10);
+                const f = ledMatrixEditState.frames[ledMatrixEditState.idx];
+                paintOn = !((f[r] >> (7 - c)) & 1);
+                painting = true;
+                paintCell(el);
+                try { grid.setPointerCapture(e.pointerId); } catch (err) {}
+            };
+            grid.onpointermove = (e) => {
+                if (!painting) return;
+                const el = document.elementFromPoint(e.clientX, e.clientY);
+                if (el && el.classList.contains('ledm-px') && grid.contains(el)) paintCell(el);
+            };
+            grid.onpointerup = () => { painting = false; };
+            grid.onpointercancel = () => { painting = false; };
+
+            const colorEl = document.getElementById('cfg-ledm-color');
+            if (colorEl) colorEl.oninput = ledMatrixApplyEditorColor;
+
+            const go = (delta) => {
+                const s = ledMatrixEditState;
+                s.idx = (s.idx + delta + s.frames.length) % s.frames.length;
+                ledMatrixBuildEditor();
+            };
+            const prevBtn = document.getElementById('cfg-ledm-prev');
+            const nextBtn = document.getElementById('cfg-ledm-next');
+            const addBtn = document.getElementById('cfg-ledm-add');
+            const dupBtn = document.getElementById('cfg-ledm-dup');
+            const delBtn = document.getElementById('cfg-ledm-del');
+            const presetSel = document.getElementById('cfg-ledm-preset');
+            if (prevBtn) prevBtn.onclick = () => go(-1);
+            if (nextBtn) nextBtn.onclick = () => go(1);
+            if (addBtn) addBtn.onclick = () => {
+                const s = ledMatrixEditState;
+                if (s.frames.length >= 32) return;
+                s.frames.splice(s.idx + 1, 0, ledMatrixEmptyFrame());
+                s.idx++;
+                ledMatrixBuildEditor();
+            };
+            if (dupBtn) dupBtn.onclick = () => {
+                const s = ledMatrixEditState;
+                if (s.frames.length >= 32) return;
+                s.frames.splice(s.idx + 1, 0, s.frames[s.idx].slice());
+                s.idx++;
+                ledMatrixBuildEditor();
+            };
+            if (delBtn) delBtn.onclick = () => {
+                const s = ledMatrixEditState;
+                if (s.frames.length <= 1) s.frames[0] = ledMatrixEmptyFrame();
+                else {
+                    s.frames.splice(s.idx, 1);
+                    if (s.idx >= s.frames.length) s.idx = s.frames.length - 1;
+                }
+                ledMatrixBuildEditor();
+            };
+            if (presetSel) presetSel.onchange = (e) => {
+                const i = parseInt(e.target.value, 10);
+                if (!isNaN(i) && LED_MATRIX_PRESETS[i]) {
+                    ledMatrixEditState.frames[ledMatrixEditState.idx] = LED_MATRIX_PRESETS[i].frame.slice();
+                    ledMatrixBuildEditor();
+                }
+                e.target.value = '';
+            };
         }
 
         // ==================== СВІТИ (Збереження / Завантаження) ====================
@@ -4290,7 +4669,9 @@
                     proximityRange: o.proximityRange,
                     syncGroup: o.syncGroup,
                     ramValue: o.ramValue,
-                    ledStates: o.ledStates
+                    ledStates: o.ledStates,
+                    matrixFrames: o.matrixFrames, matrixMode: o.matrixMode, matrixFrame: o.matrixFrame,
+                    matrixFps: o.matrixFps, matrixTrigger: o.matrixTrigger, matrixAutoColor: o.matrixAutoColor, matrixColor: o.matrixColor
                 });
             }
             let displays = currentDisplays.map(d => ({
@@ -4332,6 +4713,13 @@
             } else if (type === 'seven_segment') {
                 initialSvg = generateSevenSegmentSVG(`${saved.displayDigit ?? 8}`, '#ff1744', '#330000');
                 div.classList.add('seven-seg-block');
+            } else if (type === 'led_matrix') {
+                const ledmFrames = ledMatrixNormalizeFrames(saved.matrixFrames);
+                const ledmIdx = Math.max(0, Math.min(ledmFrames.length - 1, saved.matrixFrame ?? 0));
+                const ledmAlways = (saved.matrixTrigger || 'hold') === 'always';
+                const ledmOn = ledmAlways ? (saved.matrixColor || '#ff1744') : '#151b20';
+                initialSvg = generateLedMatrixSVG(ledmFrames[ledmIdx], ledmOn, '#151b20');
+                div.classList.add('led-matrix-block');
             } else if (type === 'buzzer') {
                 initialSvg = BUZZER_SVG;
                 div.classList.add('buzzer-block');
@@ -4385,6 +4773,14 @@
                 repeaterDelay: saved.repeaterDelay ?? 1, signalBuffer: [],
                 targetAngle: saved.targetAngle ?? 90, servoAngle: 0,
                 displayDigit: saved.displayDigit ?? 8,
+                matrixFrames: ledMatrixNormalizeFrames(saved.matrixFrames),
+                matrixMode: saved.matrixMode || 'pattern',
+                matrixFrame: Math.max(0, Math.min(31, saved.matrixFrame ?? 0)),
+                matrixFps: saved.matrixFps ?? 4,
+                matrixTrigger: saved.matrixTrigger || 'hold',
+                matrixAutoColor: saved.matrixAutoColor !== false,
+                matrixColor: saved.matrixColor || '#ff1744',
+                _matrixAnimIdx: 0, _matrixAnimAt: 0, _matrixSig: '',
                 keyLabel: saved.keyLabel || 'E', assignedCode: saved.assignedCode || 'KeyE', keyPressed: false,
                 lightMode: saved.lightMode || 'night',
                 filterColor: saved.filterColor || 'red',
@@ -4694,6 +5090,14 @@
 
         // ==================== ПРИКЛАДИ РІВНІВ ====================
         const EXAMPLE_LEVELS = {
+            '❤️ LED Матриця 8×8': {
+                desc: 'Важіль вмикає серце на LED-матриці; клік по матриці — піксельний редактор і кадри',
+                objects: [
+                    { type: 'lever', x: 0, y: 1, rotation: 0, leverToggled: true },
+                    { type: 'arrow', x: 1, y: 1, rotation: 90 },
+                    { type: 'led_matrix', x: 2, y: 1, rotation: 0, matrixTrigger: 'hold', matrixMode: 'pattern', matrixFrames: [[0, 60, 126, 255, 255, 126, 60, 0]] }
+                ]
+            },
             '☀️ День і Ніч': {
                 desc: 'Сонячна панель живить лампу вдень, соляна батарея — вночі',
                 objects: [
@@ -5157,7 +5561,9 @@
                 latchSeconds: o.latchSeconds,
                 routerMap: o.routerMap,
                 freqDivisor: o.freqDivisor,
-                clampMin: o.clampMin, clampMax: o.clampMax
+                clampMin: o.clampMin, clampMax: o.clampMax,
+                matrixFrames: o.matrixFrames, matrixMode: o.matrixMode, matrixFrame: o.matrixFrame,
+                matrixFps: o.matrixFps, matrixTrigger: o.matrixTrigger, matrixAutoColor: o.matrixAutoColor, matrixColor: o.matrixColor
             };
         }
 
@@ -5944,7 +6350,7 @@
             }
 
             for (let key in gridObjects) {
-                let obj = gridObjects[key]; if (!obj.isActive || obj.isBlocked || obj.burnedOut || obj.type === 'web_display' || obj.type === 'magnet' || obj.type === 'controlled_magnet' || obj.type === 'servo' || obj.type === 'seven_segment' || obj.type === 'buzzer' || obj.type === 'note_block' || obj.type === 'speaker' || obj.type === 'media_display' || obj.type === 'media_display_2' || obj.type === 'siren' || obj.type === 'birthday_chip' || obj.type === 'windmill' || obj.type === 'analog_clock' || obj.type === 'bar_gauge' || obj.type === 'stopwatch' || obj.type === 'compass' || obj.type === 'rotator_mechanism' || obj.type === 'observer' || obj.type === 'button' || obj.type === 'dir_button' || obj.type === 'keyboard_button' || obj.type === 'cannon') continue;
+                let obj = gridObjects[key]; if (!obj.isActive || obj.isBlocked || obj.burnedOut || obj.type === 'web_display' || obj.type === 'magnet' || obj.type === 'controlled_magnet' || obj.type === 'servo' || obj.type === 'seven_segment' || obj.type === 'led_matrix' || obj.type === 'buzzer' || obj.type === 'note_block' || obj.type === 'speaker' || obj.type === 'media_display' || obj.type === 'media_display_2' || obj.type === 'siren' || obj.type === 'birthday_chip' || obj.type === 'windmill' || obj.type === 'analog_clock' || obj.type === 'bar_gauge' || obj.type === 'stopwatch' || obj.type === 'compass' || obj.type === 'rotator_mechanism' || obj.type === 'observer' || obj.type === 'button' || obj.type === 'dir_button' || obj.type === 'keyboard_button' || obj.type === 'cannon') continue;
                 let off = getOffset(obj.rotation);
                 let currentEmitColor = obj.lastSignalColor || 'red';
 
@@ -6970,6 +7376,40 @@
                     if (segSvg) {
                         segSvg.innerHTML = generateSevenSegmentSVG(digitToShow, nextActive ? activeHexColor : "#220000", nextActive ? "#550000" : "#220000");
                     }
+                } else if (obj.type === 'led_matrix') {
+                    const ledmFrames = (obj.matrixFrames && obj.matrixFrames.length) ? obj.matrixFrames : [ledMatrixEmptyFrame()];
+                    const ledmMode = obj.matrixMode || 'pattern';
+                    const ledmLit = (obj.matrixTrigger || 'hold') === 'always' ? true : hasInput;
+                    let ledmFrame = null;
+                    if (ledmLit) {
+                        if (ledmMode === 'anim') {
+                            const ledmFps = Math.max(1, Math.min(30, obj.matrixFps || 4));
+                            const ledmNow = performance.now();
+                            if (!obj._matrixAnimAt) obj._matrixAnimAt = ledmNow;
+                            if (ledmNow - obj._matrixAnimAt >= 1000 / ledmFps) {
+                                obj._matrixAnimAt = ledmNow;
+                                obj._matrixAnimIdx = ((obj._matrixAnimIdx || 0) + 1) % ledmFrames.length;
+                            }
+                            ledmFrame = ledmFrames[(obj._matrixAnimIdx || 0) % ledmFrames.length];
+                        } else if (ledmMode === 'value') {
+                            ledmFrame = ledMatrixLevelFrame(hasInput ? (signalChanVal ?? 255) : 0);
+                        } else if (ledmMode === 'binary') {
+                            ledmFrame = [0, 0, 0, 0, 0, 0, 0, (hasInput ? (signalChanVal ?? 255) : 0) & 0xFF];
+                        } else {
+                            const ledmIdx = Math.max(0, Math.min(ledmFrames.length - 1, obj.matrixFrame ?? 0));
+                            ledmFrame = ledmFrames[ledmIdx];
+                        }
+                    } else {
+                        obj._matrixAnimIdx = 0;
+                        obj._matrixAnimAt = 0;
+                    }
+                    obj._matrixFrame = ledmFrame;
+                    obj._matrixLit = ledmLit;
+                    obj._matrixOnColor = (hasInput && obj.matrixAutoColor !== false)
+                        ? ledMatrixSignalColor(signalColor, obj.matrixColor || '#ff1744')
+                        : (obj.matrixColor || '#ff1744');
+                    obj._matrixKey = `${ledmLit ? 1 : 0}|${obj._matrixOnColor}|${ledmFrame ? ledmFrame.join(',') : ''}`;
+                    nextActive = ledmLit;
                 } else if (obj.type === 'repeater') {
                     if (!obj.signalBuffer) obj.signalBuffer = [];
                     
@@ -7463,6 +7903,8 @@
                     routerMap:o.routerMap,
                     freqDivisor:o.freqDivisor,
                     clampMin:o.clampMin, clampMax:o.clampMax,
+                    matrixFrames:o.matrixFrames, matrixMode:o.matrixMode, matrixFrame:o.matrixFrame,
+                    matrixFps:o.matrixFps, matrixTrigger:o.matrixTrigger, matrixAutoColor:o.matrixAutoColor, matrixColor:o.matrixColor,
                     burnedOut:o.burnedOut || false
                 });
             }
@@ -8031,6 +8473,7 @@
             signal_filter: 'Фільтр лінії: вирівнює і передає сигнал далі.',
             trans_display: 'Напівпрозорий піксель дисплея: крізь нього видно блоки.',
             led_strip: '8 діодів показують рівень каналу у двійковому вигляді.',
+            led_matrix: 'LED-матриця 8×8: малюй піксельні картинки (до 32 кадрів). Режими: візерунок, анімація за сигналом, рівень 0–255, двійковий код. Клік — редактор кадрів.',
             projector_beam: 'Далекобійний промінь: шле сигнал на N клітинок вперед.',
             laser_pointer: 'Бʼє червоним лазером до 20 клітинок, цілить у перший блок на лінії.',
             light_barrier: 'Світловий барʼєр: ловить перетин променя.',
