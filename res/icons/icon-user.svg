@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 35 37.02">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+    </style>
+    <symbol id="New_Symbol_1" data-name="New Symbol 1" viewBox="0 0 45 47.6">
+      <g>
+        <circle class="cls-1" cx="22.5" cy="12.53" r="12.53"/>
+        <path class="cls-1" d="m39.98,47.6c3.78,0,6.21-4.04,4.42-7.37-6.05-11.33-13.65-11.48-21.9-11.48s-15.85.14-21.9,11.48c-1.78,3.33.64,7.37,4.42,7.37h34.96Z"/>
+      </g>
+    </symbol>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <use width="45" height="47.6" transform="scale(.78)" xlink:href="#New_Symbol_1"/>
+  </g>
+</svg>

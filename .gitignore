@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+desktop-app/dist/
+*.exe
+*.blockmap
+*.asar.orig
+
+# Backups
+backup/
+
+# OS
+.DS_Store
+Thumbs.db

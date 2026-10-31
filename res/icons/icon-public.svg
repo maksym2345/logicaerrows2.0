@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 35.81 35.81">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+    </style>
+    <symbol id="New_Symbol_3" data-name="New Symbol 3" viewBox="0 0 48 48">
+      <g>
+        <circle class="cls-1" cx="24" cy="24" r="22.5"/>
+        <g>
+          <path class="cls-2" d="m45.39,21.99c1.7-9.24-9.6-9.9-10.9-.9-3.81,1.98-9.84,4.47-7.05,9.8,6.41,12.01,22.89,3.13,17.95-8.9Z"/>
+          <path class="cls-2" d="m25.06,14.21c-4.22,5.3,4.53,11.28,7.06,4.65,5.75-4.93-3.76-10.98-7.06-4.65Z"/>
+          <path class="cls-2" d="m16.03,17.04C-.32-8.44-2.43,49.08,11.64,31.27c1.56-4.87,7.91-8.81,4.39-14.23Z"/>
+          <path class="cls-2" d="m18.37,7.47c3.47,0,5.08-2.88,4.84-5.56-4.74-.33-14.03,3.81-4.84,5.56Z"/>
+          <path class="cls-2" d="m36.28,37.56c-6.21-1.17-12.69,1.84-13.08,8.7,4.42,1.37,21.87-6.44,13.08-8.7Z"/>
+        </g>
+      </g>
+    </symbol>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <use width="48" height="48" transform="translate(.41 .41) scale(.73)" xlink:href="#New_Symbol_3"/>
+  </g>
+</svg>

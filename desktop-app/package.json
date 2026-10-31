@@ -1,0 +1,54 @@
+{
+  "name": "logic-arrows",
+  "version": "1.0.0",
+  "description": "Logic Arrows – redstone-style logic + slime-physics sandbox",
+  "main": "main.js",
+  "scripts": {
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "35.7.5",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "com.logicarrows.app",
+    "productName": "Logic Arrows",
+    "artifactName": "Logic.Arrows.Setup.${version}.${ext}",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "index.html",
+      "main.js",
+      "package.json",
+      "manifest.json",
+      "icon-192.png",
+      "icon-512.png"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "testovij47-ctrl",
+        "repo": "LogicArrows"
+      }
+    ]
+  }
+}

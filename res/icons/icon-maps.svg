@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 35.03 35.71">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+    </style>
+    <symbol id="New_Symbol_2" data-name="New Symbol 2" viewBox="0 0 46.07 47.51">
+      <g>
+        <path class="cls-2" d="m44.57,20.52l-19.93,15.95c-.94.75-2.27.75-3.21,0L1.5,20.52c-1.28-1.03-1.28-2.98,0-4.01L21.43.56c.94-.75,2.27-.75,3.21,0l19.93,15.95c1.28,1.03,1.28,2.98,0,4.01Z"/>
+        <path class="cls-1" d="m44.57,29.5l-19.93,15.95c-.94.75-2.27.75-3.21,0L1.5,29.5"/>
+      </g>
+    </symbol>
+  </defs>
+  <g id="Layer_4" data-name="Layer 4">
+    <use width="46.07" height="47.51" transform="translate(.38) scale(.74)" xlink:href="#New_Symbol_2"/>
+  </g>
+</svg>

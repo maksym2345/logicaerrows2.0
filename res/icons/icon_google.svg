@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #34a853;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3, .cls-6 {
+        fill: #4285f4;
+      }
+
+      .cls-4 {
+        fill: #fbbc05;
+      }
+
+      .cls-5 {
+        fill: #ea4335;
+      }
+
+      .cls-7 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="Google-Button">
+      <g id="btn_google_dark_normal" data-name="btn google dark normal">
+        <g id="button">
+          <g id="button-bg">
+            <rect id="path-2" class="cls-6" width="40" height="40" rx="2" ry="2"/>
+            <rect id="path-2-2" data-name="path-2" class="cls-1" width="40" height="40" rx="2" ry="2"/>
+            <rect id="path-2-3" data-name="path-2" class="cls-1" width="40" height="40" rx="2" ry="2"/>
+            <rect id="path-2-4" data-name="path-2" class="cls-1" width="40" height="40" rx="2" ry="2"/>
+          </g>
+        </g>
+        <g id="button-bg-copy">
+          <rect id="path-3" class="cls-7" x="1" y="1" width="38" height="38" rx="1" ry="1"/>
+          <rect id="path-3-2" data-name="path-3" class="cls-1" x="1" y="1" width="38" height="38" rx="1" ry="1"/>
+          <rect id="path-3-3" data-name="path-3" class="cls-1" x="1" y="1" width="38" height="38" rx="1" ry="1"/>
+          <rect id="path-3-4" data-name="path-3" class="cls-1" x="1" y="1" width="38" height="38" rx="1" ry="1"/>
+        </g>
+        <g id="logo_googleg_48dp" data-name="logo googleg 48dp">
+          <path id="Shape" class="cls-3" d="m28.64,20.2c0-.64-.06-1.25-.16-1.84h-8.48v3.48h4.84c-.21,1.12-.84,2.08-1.8,2.72v2.26h2.91c1.7-1.57,2.68-3.87,2.68-6.62h0Z"/>
+          <path id="Shape-2" data-name="Shape" class="cls-2" d="m20,29c2.43,0,4.47-.81,5.96-2.18l-2.91-2.26c-.81.54-1.84.86-3.05.86-2.34,0-4.33-1.58-5.04-3.71h-3.01v2.33c1.48,2.94,4.52,4.96,8.04,4.96h0Z"/>
+          <path id="Shape-3" data-name="Shape" class="cls-4" d="m14.96,21.71c-.18-.54-.28-1.12-.28-1.71s.1-1.17.28-1.71v-2.33h-3.01c-.61,1.22-.96,2.59-.96,4.04s.35,2.83.96,4.04l3.01-2.33h0Z"/>
+          <path id="Shape-4" data-name="Shape" class="cls-5" d="m20,14.58c1.32,0,2.51.45,3.44,1.35l2.58-2.58c-1.56-1.45-3.6-2.34-6.02-2.34-3.52,0-6.56,2.02-8.04,4.96l3.01,2.33c.71-2.13,2.69-3.71,5.04-3.71h0Z"/>
+          <path id="Shape-5" data-name="Shape" class="cls-1" d="m11,11h18v18H11V11Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

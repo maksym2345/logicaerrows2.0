@@ -1,0 +1,38 @@
+{
+    "name": "Logic Arrows",
+    "short_name": "Logic Arrows",
+    "description": "Create complex structures with simple elements in this puzzle game",
+    "start_url": "/",
+    "scope": "/",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "any",
+    "categories": ["games", "puzzle"],
+    "icons": [
+        {
+            "src": "/res/favicon.png",
+            "sizes": "196x196",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/res/favicon.png",
+            "sizes": "196x196",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/res/favicon512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/res/favicon512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
