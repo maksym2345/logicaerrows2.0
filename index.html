@@ -8125,6 +8125,133 @@
                     else nextActive = false;
                     signalChanVal = 255;
                     signalColor = 'yellow';
+                } else if (obj.type === 'ultrasonic') {
+                    // measure distance to nearest block in facing direction
+                    let off = getOffset(obj.rotation);
+                    let dist = 0;
+                    for (let step=1; step<= (obj.maxRange ?? 10); step++) {
+                        let tk = (obj.x + off.dx*step) + ',' + (obj.y + off.dy*step);
+                        if (gridObjects[tk]) { dist = step; break; }
+                    }
+                    if (dist === 0) dist = obj.maxRange ?? 10;
+                    nextActive = true;
+                    signalChanVal = Math.min(255, dist * 10);
+                    signalColor = 'yellow';
+                } else if (obj.type === 'color_sensor') {
+                    let off = getOffset(obj.rotation);
+                    let tk = (obj.x + off.dx) + ',' + (obj.y + off.dy);
+                    let target = gridObjects[tk];
+                    let detected = false;
+                    if (target) {
+                        let c = target.lastSignalColor || '';
+                        detected = (c === (obj.filterColor ?? 'red'));
+                    }
+                    nextActive = detected;
+                    signalChanVal = detected ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'humidity_sensor') {
+                    if (obj.humidityVal === undefined) obj.humidityVal = 60;
+                    nextActive = true;
+                    signalChanVal = Math.round((obj.humidityVal / 100) * 255);
+                    signalColor = 'blue';
+                } else if (obj.type === 'pressure_sensor') {
+                    let upKey = obj.x + ',' + (obj.y - 1);
+                    nextActive = !!gridObjects[upKey];
+                    signalChanVal = nextActive ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'gas_sensor') {
+                    // active if any neighbor is a smoke_gen or dynamite or burned
+                    let gasNear = false;
+                    for (let dx2=-1; dx2<=1; dx2++) for (let dy2=-1; dy2<=1; dy2++) {
+                        if (dx2===0 && dy2===0) continue;
+                        let nk = (obj.x+dx2)+','+(obj.y+dy2);
+                        let o2 = gridObjects[nk];
+                        if (o2 && (o2.type === 'smoke_gen' || o2.type === 'dynamite' || o2.burnedOut)) { gasNear = true; break; }
+                    }
+                    nextActive = gasNear || hasInput;
+                    signalChanVal = nextActive ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'motion_sensor') {
+                    nextActive = mapMotionDetected || hasInput;
+                    signalChanVal = nextActive ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'lock') {
+                    if (!obj.unlocked) obj.unlocked = false;
+                    // unlock if a key block is adjacent
+                    for (let dx2=-1; dx2<=1; dx2++) for (let dy2=-1; dy2<=1; dy2++) {
+                        if (dx2===0 && dy2===0) continue;
+                        let nk = (obj.x+dx2)+','+(obj.y+dy2);
+                        if (gridObjects[nk] && gridObjects[nk].type === 'key') obj.unlocked = true;
+                    }
+                    nextActive = obj.unlocked && hasInput;
+                    signalChanVal = nextActive ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'key') {
+                    nextActive = true;
+                    signalChanVal = 255;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'password_gate') {
+                    if (!obj.enteredPassword) obj.enteredPassword = '';
+                    nextActive = hasInput && (obj.enteredPassword === (obj.password ?? '1234'));
+                    signalChanVal = nextActive ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'door' || obj.type === 'bridge') {
+                    nextActive = hasInput;
+                    signalChanVal = nextActive ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'tester') {
+                    let expected = obj.expectedValue ?? 255;
+                    let actual = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    nextActive = hasInput && (actual === expected);
+                    signalChanVal = nextActive ? 255 : 0;
+                    signalColor = nextActive ? 'green' : 'red';
+                } else if (obj.type === 'rtc') {
+                    let now = new Date();
+                    nextActive = true;
+                    signalChanVal = now.getSeconds();
+                    signalColor = 'yellow';
+                } else if (obj.type === 'calendar') {
+                    let now = new Date();
+                    let doy = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
+                    nextActive = true;
+                    signalChanVal = doy % 256;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'weather_gen') {
+                    if (!obj._wTick) obj._wTick = 0;
+                    obj._wTick++;
+                    let w = ['clear','rain','snow','wind'][Math.floor(obj._wTick/50) % 4];
+                    obj.weatherType = w;
+                    nextActive = true;
+                    signalChanVal = ({clear:0,rain:85,snow:170,wind:255})[w];
+                    signalColor = 'blue';
+                } else if (obj.type === 'particle_emitter') {
+                    nextActive = hasInput;
+                    if (hasInput) {
+                        // emit particles (visual only)
+                        let pColor = obj.particleColor || 'yellow';
+                        let colMap = { red:'#f44336', yellow:'#ffeb3b', green:'#4caf50', blue:'#2196f3', white:'#ffffff' };
+                        let c = colMap[pColor] || '#ffeb3b';
+                        for (let i=0;i<2;i++){
+                            let p = document.createElement('div');
+                            p.className = 'particle';
+                            p.style.background = c;
+                            let sz = 3 + Math.random()*3;
+                            p.style.width = sz+'px'; p.style.height = sz+'px';
+                            let ox = (Math.random()-0.5)*CELL_SIZE;
+                            let oy = -(Math.random()*CELL_SIZE+CELL_SIZE*0.3);
+                            p.style.setProperty('--px', ox+'px'); p.style.setProperty('--py', oy+'px');
+                            p.style.left = ((obj.x*CELL_SIZE)+camX+CELL_SIZE/2-sz/2)+'px';
+                            p.style.top = ((obj.y*CELL_SIZE)+camY+CELL_SIZE/2-sz/2)+'px';
+                            objectsLayer.appendChild(p);
+                            setTimeout(()=>p.remove(), 900);
+                        }
+                    }
+                    signalChanVal = hasInput ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'hologram') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? 255 : 0;
+                    signalColor = 'blue';
                 } else {
                     nextActive = hasInput;
                 }
