@@ -8252,6 +8252,133 @@
                     nextActive = hasInput;
                     signalChanVal = hasInput ? 255 : 0;
                     signalColor = 'blue';
+                } else if (obj.type === 'digital_clock') {
+                    let now = new Date();
+                    nextActive = true;
+                    signalChanVal = (now.getHours() * 60 + now.getMinutes()) % 256;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'logger') {
+                    if (!obj._log) obj._log = [];
+                    if (hasInput) obj._log.push(signals[0].channelValue ?? 0);
+                    if (obj._log.length > (obj.logSize ?? 16)) obj._log.shift();
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = hasInput ? signals[0].color : 'red';
+                } else if (obj.type === 'gear') {
+                    if (!obj._angle) obj._angle = 0;
+                    if (hasInput) obj._angle = (obj._angle + (obj.gearSpeed ?? 5)) % 360;
+                    nextActive = hasInput;
+                    signalChanVal = Math.round((obj._angle / 360) * 255);
+                    signalColor = 'yellow';
+                } else if (obj.type === 'belt') {
+                    if (!obj._pos) obj._pos = 0;
+                    if (hasInput) obj._pos = (obj._pos + (obj.beltSpeed ?? 3)) % 100;
+                    nextActive = hasInput;
+                    signalChanVal = Math.round((obj._pos / 100) * 255);
+                    signalColor = 'yellow';
+                } else if (obj.type === 'platform') {
+                    if (!obj._pos) obj._pos = 0;
+                    if (hasInput) obj._pos = Math.min(obj.maxTravel ?? 5, obj._pos + 1);
+                    else obj._pos = Math.max(0, obj._pos - 1);
+                    nextActive = obj._pos > 0;
+                    signalChanVal = Math.round((obj._pos / (obj.maxTravel ?? 5)) * 255);
+                    signalColor = 'yellow';
+                } else if (obj.type === 'rail') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'pipe') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 255) : 0;
+                    signalColor = hasInput ? signals[0].color : 'blue';
+                } else if (obj.type === 'valve') {
+                    // open when active
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 255) : 0;
+                    signalColor = hasInput ? signals[0].color : 'blue';
+                } else if (obj.type === 'turbine') {
+                    // generates signal when fluid flows
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'spring') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 255) : 0;
+                    signalColor = hasInput ? signals[0].color : 'green';
+                } else if (obj.type === 'gravity_gen') {
+                    nextActive = true;
+                    signalChanVal = 255;
+                    signalColor = 'purple';
+                } else if (obj.type === 'magnetic_field') {
+                    nextActive = true;
+                    signalChanVal = 255;
+                    signalColor = 'blue';
+                } else if (obj.type === 'sequencer') {
+                    if (!obj._seqIdx) obj._seqIdx = 0;
+                    if (!obj._seqTimer) obj._seqTimer = 0;
+                    obj._seqTimer++;
+                    let stepLen = obj.stepLength ?? 4;
+                    if (obj._seqTimer >= stepLen) { obj._seqTimer = 0; obj._seqIdx = (obj._seqIdx + 1) % (obj.seqSteps ?? 8); }
+                    nextActive = true;
+                    signalChanVal = (obj.seqPattern && obj.seqPattern[obj._seqIdx]) ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'synth') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 255) : 0;
+                    signalColor = 'purple';
+                } else if (obj.type === 'mic_sensor') {
+                    // approximate: active on any input
+                    nextActive = hasInput || Math.random() < 0.1;
+                    signalChanVal = nextActive ? Math.floor(Math.random()*256) : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'equalizer') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 255) : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'audio_recorder') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 255) : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'oscilloscope') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = hasInput ? signals[0].color : 'yellow';
+                } else if (obj.type === 'bar_chart') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = hasInput ? signals[0].color : 'yellow';
+                } else if (obj.type === 'spectrum') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = hasInput ? signals[0].color : 'yellow';
+                } else if (obj.type === 'text_display') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = hasInput ? signals[0].color : 'yellow';
+                } else if (obj.type === 'color_matrix') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = hasInput ? signals[0].color : 'yellow';
+                } else if (obj.type === 'wifi_module') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = 'purple';
+                } else if (obj.type === 'bluetooth') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = 'blue';
+                } else if (obj.type === 'chat_block') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? 255 : 0;
+                    signalColor = 'yellow';
+                } else if (obj.type === 'network_client') {
+                    nextActive = hasInput;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = 'purple';
+                } else if (obj.type === 'server_block') {
+                    nextActive = true;
+                    signalChanVal = hasInput ? (signals[0].channelValue ?? 0) : 0;
+                    signalColor = 'purple';
                 } else {
                     nextActive = hasInput;
                 }
